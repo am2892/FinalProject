@@ -1,0 +1,224 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+html {
+    overflow-x: hidden;
+    background-color: #f5f5f5;
+}
+
+.navbar {
+    float: right;
+    margin-right: 5%;
+    font-family: Lato, Avenir, Arial, Helvetica, sans-serif;
+}
+.navbar-item {
+    margin: 40px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #323648;
+}
+.navbar-item:hover {
+    opacity: .7;
+}
+.title {
+    margin: 40px;
+    font-size: 1.6rem;
+    font-weight: 900;
+    text-decoration: none;
+    color: #323648;
+    font-family: Lato, Avenir, Arial, Helvetica, sans-serif;
+}
+.error {
+    margin: 40px;
+    font-size: 1.6rem;
+    font-weight: 900;
+    text-decoration: none;
+    color: red;
+    font-family: Lato, Avenir, Arial, Helvetica, sans-serif;
+    padding: 10px;
+    border: 3px dotted red;
+}
+.page-wrapper {
+    display: flex;
+    margin-top: 10vh!important;
+    flex-direction: row;
+    width: 85%!important;
+    margin: 0;
+    padding: 0;
+    margin-left: 5%!important;
+}
+.calculator-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 4.25;
+    margin: 0;
+    padding: 0;
+    /* border: 1px solid red; */
+}
+.calculator-container {
+    width: 90%;
+    box-shadow: 0px 1px 10px rgba(34, 34, 34, 0.3);
+}
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    margin-left: 10.5%;
+    margin-top: 2%;
+}
+.buttons-row {
+    display: flex;
+    flex-direction: row;
+}
+.button {
+    display: flex;
+    border: none;
+    outline: none;
+    flex:1;
+    padding: 10px;
+    font-size: 1rem;
+    text-align: center;
+    font-weight: 900;
+    margin: 5px;
+    color: #323648;
+    border-radius: 5px;
+    font-family: Lato, Avenir, Arial, Helvetica, sans-serif;
+    background-color: #d3d1d1;
+}
+.button:hover {
+    opacity: .7;
+    cursor: pointer;
+}
+.button:active {
+    background: red;
+}
+.calculate {
+    background-color: #086788;
+    color: #fafafa;
+    font-size: .75rem;
+}
+.input-wrapper {
+    width: 65%;
+    display: flex;
+    flex-direction: row;
+    margin-left: 15%;
+    margin-top: 2%;
+}
+.input {
+    flex: 5;
+    padding: 10px;
+    display: flex;
+}
+.second {
+    display: none;
+}
+.input-wrapper button {
+    flex: 1;
+    display: flex;
+}
+.log-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0px 1px 10px rgba(34, 34, 34, 0.3);
+}
+
+.log-container {
+    /* border: 1px solid red; */
+}
+.title-container {
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: row;
+    margin-top: 5%;
+}
+.title-container h1 {
+    flex: 3;
+    color: #323648;
+    font-family: Lato, Avenir, Arial, Helvetica, sans-serif;
+    margin-left: 5%;
+    margin-top: 2%;
+}
+.title-container button {
+    flex: 1;
+}
+.table-row {
+    display: flex;
+    margin-top: 2vh;
+    flex-direction: row;
+}
+.log {
+    font-size: 1rem;
+    color: #323648;
+    font-family: Lato, Avenir, Arial, Helvetica, sans-serif;
+    margin-top: 2%;
+    flex: 1;
+}
+.bring-back {
+    background-color: #086788;
+    font-size: .9rem;
+    color: #fafafa;
+    flex: 1;
+}
+
+.delete {
+    background-color: #DD1C1A;
+    color: #fafafa;
+    flex: 1;
+    font-size: .9rem;
+}
+.deleteAll {
+    margin-right: 5%!important;
+    background-color: #DD1C1A;
+    color: #fafafa;
+    flex: 1;
+    font-size: .9rem;
+}
+
+.login-form {
+    height: 500px;
+    width: 600px;
+    margin: auto;
+    box-shadow: 0px 1px 10px rgba(34, 34, 34, 0.3);
+}
+.field {
+    display: flex;
+    flex-direction: column;
+}
+.login-input {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 6%;
+    height: 50px;
+}
+.checkbox-wrapper {
+    margin-top: 5%!important;
+    font-size: 16px;
+    font-family: Lato, Avenir, Arial, Helvetica, sans-serif;
+}
+.checkbox {
+    margin-left: 10%;
+    font-size: 20px;
+}
+.login-button {
+    margin-left: 10%;
+    width: 30%;
+    height: 10%;
+    text-align: center;
+    margin-top: 3%!important;
+    background: #57A773;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Lato, Avenir, Arial, Helvetica, sans-serif;
+    transition: .2s;
+}
+.login-button:hover {
+    opacity: .7;
+    transition: .2s;
+    cursor: pointer;
+}

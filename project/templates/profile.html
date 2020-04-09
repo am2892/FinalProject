@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="title">
+  Welcome, {{ name }}!
+</h1>
+    <!-- Form -->
+      <form action="/profile" method="POST" class="page-wrapper">
+      <div class="calculator-wrapper">
+          <div class="calculator-container">
+                <div class="buttons-container">
+                  <div class="buttons-row">
+                    <input type="submit" value="mean" class="button" type="submit" name="function" />
+                    <input type="submit" value="median" class="button" type="submit" name="function" />
+                    <input type="submit" value="mode" class="button" type="submit" name="function" />
+                    <input type="submit" value="variance" class="button" type="submit" name="function" />
+                  </div>
+                  <div class="buttons-row">
+                    <input type="submit" value="variance-population-proportion" class="button" type="submit" name="function" />
+                    <input type="submit" value="z-score" class="button" type="submit" name="function" />
+                    <input type="submit" value="standardized-score" class="button" type="submit" name="function" />
+                    <input type="submit" value="pcc" class="button" type="submit" name="function" />
+                  </div>
+                  <div class="buttons-row">
+                    <input type="submit" value="confidence-interval" class="button" type="submit" name="function" />
+                    <input type="submit" value="proportion" class="button" type="submit" name="function" />
+                    <input type="submit" value="sample-mean" class="button" type="submit" name="function" />
+                    <input type="submit" value="p-value" class="button" type="submit" name="function" />
+                  </div>
+                  <div class="buttons-row">
+                    <input type="submit" value="population-standard-deviation" class="button" type="submit" name="function" />
+                    <input type="submit" value="sample-standard-deviation" class="button" type="submit" name="function" />
+                    <input type="submit" value="variance-sample-proportion" class="button" type="submit" name="function" />
+                  </div>
+                </div>
+                <div class="input-wrapper">
+                  <input
+                  type="text"
+                  id="input"
+                  placeholder="Input Data Set ex: 1,2,3"
+                  class="input"
+                  name="dataset"
+                  value = {{ numbers }}
+                />
+                <input
+                  type="text"
+                  placeholder="second nput Data Set"
+                  class="input second"
+                  name="dataset2"
+                />
+                </div>
+              <br />
+              <div class="alert">
+              {% if error is sameas true %}
+                <h1 class="error">Error: {{ answer }} </h1>
+              {% else %}
+                <h1 class="title">Answer: {{ answer }} </h1>
+              {% endif %}
+            </div>
+        </div>  
+        </div>
+      <div class="log-wrapper">
+        <div class="log-container">
+          <div class="title-container">
+            <h1>Your History</h1>
+            <input type="submit" class="button deleteAll" name="function" value="deleteAll"></input>
+          </div>
+        <table class="functions-container">
+        {% if logCount %}
+            {% for log in logCount %}
+            <tr class="table-row">
+              <td class='log'>{{log.functionName}}:</td>
+              <td class='log'>{{log.numbers}}</td>
+              <td>
+                  <a href="{{ url_for('main.delete_component', component_id=log.id) }}" class="button delete">delete</a>
+              </td>            
+              <td>
+                <a href="{{ url_for('main.return_numbers', component_id=log.id) }}" class="button bring-back">bring back</a>
+              </td>
+            </tr>
+          {% endfor %}
+        {% endif %}
+        </table>
+        </div>
+      </form>
+{% endblock %}
