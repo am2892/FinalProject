@@ -26,9 +26,6 @@
                                 Profile
                             {% endif %}
                             </a>
-                            <a href="{{ url_for('main.task') }}" class="navbar-item">
-                                Task
-                            </a>
                             {% if not current_user.is_authenticated %}
                             <a href="{{ url_for('auth.login') }}" class="navbar-item">
                                 Login
@@ -42,6 +39,11 @@
                                 Logout
                             </a>
                             {% endif %}
+                            </a>
+                            <a href="{{ url_for('main.task') }}" class="navbar-item">
+                                Task
+                            {% endif %}
+                            </a>
                         </div>
                     </div>
                 </div>
