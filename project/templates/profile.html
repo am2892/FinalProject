@@ -1,19 +1,26 @@
 {% extends "base.html" %}
-{% block content %}
-</h1>
-<h1 class="title">
-  Welcome, {{ name }}!
-</h1>
-      <form action="/profile" method="POST" class="page-wrapper">
-        
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Monthly Calendar and Planner</title>
-    <link rel="stylesheet" href="{{ url_for("static", filename="style.css") }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for("static", filename="") }}favicon_{{ current_day }}.png" id="favicon">
-    <meta name="viewport" content="width=400" />
-</head>
+
+{% block head %}
+    {{ super() }}
+    <style type="text/css"><!--
+
+    td.past-month {
+        color: #bbb;
+    }
+
+    #cal table {
+        margin: 0 10%;
+        width: 80%;
+        height: 80%;
+    }
+
+    #cal h1 {
+        background-color: #fff;
+        padding: 3px;
+    }
+
+    //--></style>
+{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -46,6 +53,18 @@
         </div>
     </div>
 {% endblock %}
-  
-</html>
+
+{% block tail %}
+    {{ super() }}
+    <script type="text/javascript">
+    $(window).load(function() {
+        $('#cal').orbit({     
+            animation: 'fade',
+            animationSpeed: 0,
+            timer: false,
+            directionalNav: true,
+            fluid: '4x3'
+        });
+   });
+</script>
 {% endblock %}
