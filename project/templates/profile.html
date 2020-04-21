@@ -14,10 +14,38 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for("static", filename="") }}favicon_{{ current_day }}.png" id="favicon">
     <meta name="viewport" content="width=400" />
 </head>
-<body>
 
-    <div id="statusbar" class="">Processing...</div>
-
-</body>
+{% block body %}
+    <div class="row">
+        <div class="twelve columns centered">
+            <div id="cal">
+                {% for month in cal %}
+                {% set current_month = loop.index %}
+                <div>
+                    <h1>{{ ['January', 'Febuary', 'March', 'April',
+                            'May', 'June', 'July', 'August',
+                            'September', 'October', 'November', 'December'][loop.index0] }} {{ year }}</h1>
+                    <table>
+                        {% for week in month %}
+                        <tr>
+                            {% for date in week %}
+                                {% if date.month == current_month %}
+                                <td class="current-month">
+                                {% else %}
+                                <td class="past-month">
+                                {% endif %}
+                                {{ date.day }}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+  
 </html>
 {% endblock %}
