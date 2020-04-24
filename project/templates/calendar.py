@@ -1,10 +1,10 @@
 import calendar
-# Create a plain text calendar
-#c = calendar.TextCalendar(calendar.WEDNESDAY)
+# Create a plain text cal
+#c = cal.TextCalendar(cal.WEDNESDAY)
 #str = c.formatmonth(2020, 1, 0, 0)
 #print(str)
 
-# Create an HTML formatted calendar
+# Create an HTML formatted cal
 hc = calendar.HTMLCalendar(calendar.WEDNESDAY)
 str = hc.formatmonth(2020, 1)
 print(str)
@@ -13,7 +13,7 @@ print(str)
 for i in c.itermonthdays(2020, 4):
     print(i)
 
-    # The calendar can give info based on local such a names of days and months (full and abbreviated forms)
+    # The cal can give info based on local such a names of days and months (full and abbreviated forms)
     for name in calendar.month_name:
         print(name)
     for day in calendar.day_name:
