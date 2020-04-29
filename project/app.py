@@ -33,6 +33,7 @@ def register_extensions(app):
 
 def register_blueprints(app):
     from models import User
+    print("test")
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
@@ -46,9 +47,10 @@ def register_blueprints(app):
     # app.register_blueprint(main_blueprint)
     from cal.cal import calendar_bp
     app.register_blueprint(calendar_bp, url_prefix='/calendar')
+    print("test this")
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(debug=True,host='127.0.0.1', port=5000)
+    app.run(debug=True,host='0.0.0.0', port=5000)
 
     print("main running")
