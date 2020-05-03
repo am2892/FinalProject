@@ -14,22 +14,19 @@ def create_app():
 
 
 
-
     app.config['SECRET_KEY'] = '9OLWxND4o83j4K4iuopO'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
     register_extensions(app)
     register_blueprints(app)
-
+    setup_database(app)
 
     return app
-
 
 def register_extensions(app):
     print("registering extensions")
     db.init_app(app)
     login_manager.init_app(app)
-
 
 def register_blueprints(app):
     from .models import User
@@ -48,6 +45,11 @@ def register_blueprints(app):
     from .cal.cal import calendar_bp
     app.register_blueprint(calendar_bp, url_prefix='/calendar')
     print("test this")
+
+def setup_database(app):
+    with app.app_context():
+
+        db.create_all()
 
 if __name__ == '__main__':
     app = create_app()
