@@ -1,5 +1,12 @@
 {% extends "base.html" %}
-
+{% block content %}
+<h1 class="title">
+  Welcome!
+</h1>
+    <!-- Form -->
+      <form action="/profile" method="POST" class="page-wrapper">
+{% endblock %}
+          
 {% block head %}
     {{ super() }}
     <style type="text/css"><!--
