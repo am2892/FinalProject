@@ -25,8 +25,8 @@
                                 Home
                             </a>
                             {% if current_user.is_authenticated %}
-                            <a href="{{ url_for('main.profile') }}" class="navbar-item">
-                                Profile
+                            <a href="{{ url_for('main.calendar') }}" class="navbar-item">
+                                Calendar
                             {% endif %}
                             </a>
                             {% if not current_user.is_authenticated %}
