@@ -2,11 +2,15 @@ import calendar
 
 import flask
 from flask import render_template
+from flask import render_template, Blueprint
+from flask_login import login_required, current_user
+import datetime
 
 calendar_bp = flask.Blueprint('cal', __name__, template_folder='templates')
 
 
 @calendar_bp.route('/<int:year>/<int:month>')
+@login_required
 def random_cal(year, month):
     tc = calendar.HTMLCalendar(firstweekday=0)
     tc.cssclasses = ["mon bg-primary", "tue", "wed", "thu", "fri", "sat", "sun"]
@@ -48,6 +52,7 @@ def custformatday(c, day, weekday):
     """
     Return a day as a table cell.
     """
+    now = datetime.datetime.now()
     if day == 0:
         # day outside month
         return '<td class="%s">&nbsp;</td>' % "noday"
@@ -57,4 +62,9 @@ def custformatday(c, day, weekday):
 # TODO do something better than this
 def get_event(day):
     # don't forget you have access to year and month
-    return "<div class='bg-danger'>I'm an event</div>"
+   # return "<div class='bg-danger'>I'm an event</div>"
+    now = datetime.datetime.now()
+    if day == now.day:
+        return "<div class='bg-danger'>TODAY</div>"
+    else:
+        return "<div class='bg-danger'>I'm an event</div>"
