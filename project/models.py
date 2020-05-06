@@ -1,6 +1,6 @@
 from flask_login import UserMixin
 from sqlalchemy import Table, Column, Integer, String, MetaData
-
+from datetime import datetime
 from .app import db
 
 class User(UserMixin, db.Model):
