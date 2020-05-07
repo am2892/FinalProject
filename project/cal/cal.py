@@ -5,6 +5,7 @@ from flask import render_template
 from flask import render_template, Blueprint
 from flask_login import login_required, current_user
 import datetime
+from datetime import date
 
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
@@ -75,21 +76,21 @@ def get_event(day):
     else:
         return "<div class='bg-danger'>I'm an event</div>"
 
-def get_context_data(self, **kwargs):
-    d = get_date(self.request.GET.get('month', None))
-    context['prev_month'] = prev_month(d)
-    context['next_month'] = next_month(d)
-    return context
+#def get_context_data(self, **kwargs):
+#    d = get_date(self.request.GET.get('month', None))
+#    context['prev_month'] = prev_month(d)
+#    context['next_month'] = next_month(d)
+#    return context
 
-def prev_month(d):
-    first = d.replace(day=1)
-    prev_month = first - timedelta(days=1)
-    month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
-    return month
+#def prev_month(d):
+#    first = d.replace(day=1)
+#    prev_month = first - timedelta(days=1)
+#    month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
+#    return month
 
-def next_month(d):
-    days_in_month = calendar.monthrange(d.year, d.month)[1]
-    last = d.replace(day=days_in_month)
-    next_month = last + timedelta(days=1)
-    month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
-    return month
+#def next_month(d):
+#    days_in_month = calendar.monthrange(d.year, d.month)[1]
+#    last = d.replace(day=days_in_month)
+#    next_month = last + timedelta(days=1)
+#    month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
+#    return month
