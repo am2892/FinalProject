@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, redirect, url_for, request
+from flask import render_template, Blueprint, redirect, url_for, request, flash
 from flask_login import login_required, current_user
 import datetime
 from ..cal.cal import random_cal
@@ -28,16 +28,25 @@ def calendar():
     })
 
 @main_bp.route("/calendar", methods=['POST'])
-def events():
-    eventtitle = request.form.get('event title')
-    eventdesc = request.form.get('event description')
-    starttime = request.form.get('start day/start time')
-    endtime = request.form.get('end day/end time')
+def events_post():
+    eventtitle = request.form.get('eventtitle')
+    print eventtitle
+    eventdesc = request.form.get('eventdesc')
+    print eventdesc
+    starttime = request.form.get('starttime')
+    print starttime
+    endtime = request.form.get('endtime')
+    print endtime
 
-    new_event = Event(eventtitle=eventtitle, eventdesc=eventdesc, starttime=starttime, endtime=endtime)
+    if endtime < starttime:
+        flash('End date and time cannot occur before start date and time. Try again.')
+        return redirect(url_for('main.calendar'))
 
-    db.session.add(new_event)
-    db.session.commit()
+    else:
+        new_event = Event(eventtitle=eventtitle, eventdesc=eventdesc, starttime=starttime, endtime=endtime)
 
-    flash('Event successfully added.')
-    return redirect(url_for('main.calendar'))
+        db.session.add(new_event)
+        db.session.commit()
+
+        flash('Event successfully added!')
+        return redirect(url_for('main.calendar'))

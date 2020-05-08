@@ -30,6 +30,7 @@ def register_extensions(app):
 
 def register_blueprints(app):
     from .models import User
+    from .models import Event
     print("test")
     @login_manager.user_loader
     def load_user(user_id):
