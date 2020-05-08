@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, redirect, url_for
 from flask_login import login_required, current_user
 import datetime
 from ..cal.cal import random_cal
@@ -19,4 +19,8 @@ def profile():
 @login_required
 def calendar():
     now = datetime.datetime.now()
-    return random_cal(now.year, now.month)
+    return random_cal(now.year, now.month,{
+        1: ["example"],
+        8: ["no."],
+        19: ["bye."]
+    })
