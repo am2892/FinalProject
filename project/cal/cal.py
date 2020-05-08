@@ -1,7 +1,7 @@
 import calendar
 
 import flask
-from flask import render_template
+from flask import render_template, url_for
 from flask import render_template, Blueprint
 from flask_login import login_required, current_user
 import datetime
@@ -24,6 +24,21 @@ def random_cal(year, month, ev = {}):
     tc.cssclass_month = "table"
     # print(tc.formatmonth(year, month))
     return render_template("calendar.html", calendar=custformat(tc, year, month, ev))
+
+### set up code to input form data from events ###
+#def events():
+#    eventtitle = request.form.get('event title')
+#    eventdesc = request.form.get('event description')
+#    starttime = request.form.get('start day/start time')
+#    endtime = request.form.get('end day/end time')
+
+#    new_event = Event(eventtitle=eventtitle, eventdescription=eventdescription, startday_starttime=startday_starttime, endday_endtime=endday_endtime)
+
+#    db.session.add(new_event)
+#    db.session.commit()
+
+#    return redirect(url_for())
+### set up code to input form data from events ###
 
 def cal_with_events():
     tc = calendar.HTMLCalendar(firstweekday=0)

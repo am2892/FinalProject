@@ -18,7 +18,7 @@
     </div>
 
 Add event to your calendar
-<form>
+<!-- <form>
 <label for="eventtitle">Event title:</label>
 <input type="text" id="eventtitle" name="eventtitle"><br>
 <label for="eventdesc">Event description:</label>
@@ -28,5 +28,36 @@ Add event to your calendar
 <label for="endtime">End day/time:</label>
 <input type="datetime-local" id="endtime" name="endtime"><br>
 <input type="submit" value="Add to calendar">
+</form> -->
+
+<form method="POST" action="/calendar" class="event-form">
+    <div class="field">
+        <div class="control">
+            <input class="event-input" type="text" name="eventtitle" placeholder="Event Title" autofocus="">
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="control">
+            <input class="event-input" type="text" name="eventdesc" placeholder="Event Description" autofocus="">
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="control">
+            <label for="starttime">Start day/time:</label>
+            <input class="event-input" type="datetime-local" name="startime" placeholder="Start Date/Time" autofocus="">
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="control">
+            <label for="endtime">End day/time:</label>
+            <input class="event-input" type="datetime-local" name="endtime" placeholder="End Date/Time" autofocus="">
+        </div>
+    </div>
+
+    <button class="event-button">Add event</button>
 </form>
+    
 {% endblock %}

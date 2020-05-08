@@ -9,8 +9,15 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
 
-class functions(db.Model):
-    id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
-    userName = db.Column(db.String(1000))
-    functionName = db.Column(db.String(1000))
-    numbers = db.Column(db.String(1000))
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    eventtitle = db.Column(db.String(100))
+    eventdesc = db.Column(db.String(500))
+    starttime = db.Column(db.DateTime)
+    endtime = db.Column(db.DateTime)
+
+#class functions(db.Model):
+#    id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
+#    userName = db.Column(db.String(1000))
+#    functionName = db.Column(db.String(1000))
+#    numbers = db.Column(db.String(1000))

@@ -48,6 +48,7 @@ def register_blueprints(app):
 
 def setup_database(app):
     with app.app_context():
+        from .models import Event
 
         db.create_all()
 

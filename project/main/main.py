@@ -1,7 +1,9 @@
-from flask import render_template, Blueprint, redirect, url_for
+from flask import render_template, Blueprint, redirect, url_for, request
 from flask_login import login_required, current_user
 import datetime
 from ..cal.cal import random_cal
+from ..models import Event
+from ..app import db
 
 main_bp = Blueprint('main', __name__)
 
@@ -24,3 +26,18 @@ def calendar():
         8: ["no."],
         19: ["bye."]
     })
+
+@main_bp.route("/calendar", methods=['POST'])
+def events():
+    eventtitle = request.form.get('event title')
+    eventdesc = request.form.get('event description')
+    starttime = request.form.get('start day/start time')
+    endtime = request.form.get('end day/end time')
+
+    new_event = Event(eventtitle=eventtitle, eventdesc=eventdesc, starttime=starttime, endtime=endtime)
+
+    db.session.add(new_event)
+    db.session.commit()
+
+    flash('Event successfully added.')
+    return redirect(url_for('main.calendar'))
