@@ -7,12 +7,6 @@ from flask_login import login_required, current_user
 import datetime
 import holidays
 
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
-from django.views import generic
-from django.urls import reverse
-from django.utils.safestring import mark_safe
-
 calendar_bp = flask.Blueprint('cal', __name__, template_folder='templates')
 
 
@@ -24,21 +18,6 @@ def random_cal(year, month, ev = {}):
     tc.cssclass_month = "table"
     # print(tc.formatmonth(year, month))
     return render_template("calendar.html", calendar=custformat(tc, year, month, ev))
-
-### set up code to input form data from events ###
-#def events():
-#    eventtitle = request.form.get('event title')
-#    eventdesc = request.form.get('event description')
-#    starttime = request.form.get('start day/start time')
-#    endtime = request.form.get('end day/end time')
-
-#    new_event = Event(eventtitle=eventtitle, eventdescription=eventdescription, startday_starttime=startday_starttime, endday_endtime=endday_endtime)
-
-#    db.session.add(new_event)
-#    db.session.commit()
-
-#    return redirect(url_for())
-### set up code to input form data from events ###
 
 def cal_with_events():
     tc = calendar.HTMLCalendar(firstweekday=0)
@@ -88,12 +67,13 @@ def custformatday(c, day, weekday, ev):
 # TODO do something better than this
 def get_event(day, ev):
     if day in ev:
-        str = "<div>"
+        str = "<div class='bg-warning'>"
         for event in ev[day]:
             str += event
         str += "</div>"
         return str
-    return "<div class='bg-danger'>I'm an event</div>"
+#    return "<div class='bg-danger'>I'm an event</div>"
+    return "<div class='bg-warning'> </div>"
     # don't forget you have access to year and month
    # return "<div class='bg-danger'>I'm an event</div>"
    # now = datetime.datetime.now()

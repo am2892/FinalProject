@@ -4,8 +4,11 @@ import datetime
 from ..cal.cal import random_cal
 from ..models import Event
 from ..app import db
+import holidays
+from datetime import date
+import calendar
 
-main_bp = Blueprint('main', __name__)
+main_bp = Blueprint('main', __name__, template_folder='templates')
 
 @main_bp.route("/")
 def index():
@@ -17,19 +20,41 @@ def index():
 def profile():
     return render_template("profile.html", name=current_user.name)
 
+#@main_bp.route("/<int:year>/<int:month>")
+#@main_bp.route('/<int:year>/<int:month>')
+#@login_required
+#def calendar():
+#    now = datetime.datetime.now()
+#    for date , name in holidays.US(years = now.year).items():
+#        if now.month == date.month:
+#            return random_cal(date.year,date.month,{date.day:[name]})
+#    return random_cal(now.year, now.month)
+
 @main_bp.route("/calendar")
 @login_required
 def calendar():
     now = datetime.datetime.now()
-    return random_cal(now.year, now.month,{
-        1: ["example"],
-        8: ["no."],
-        19: ["bye."]
-    })
+    for date , name in holidays.US(years = now.year).items():
+        if now.month == date.month:
+            return random_cal(date.year,date.month,{date.day:[name]})
+
+#@main_bp.route("/calendar")
+#@login_required
+#def calendar():
+#    now = datetime.datetime.now()
+#    us_holidays = holidays.US()
+#    return random_cal(now.year, now.month,{
+#        1: ["example"],
+#        8: ["no."],
+#        19: ["bye."]
+#    })
 
 @main_bp.route("/calendar", methods=['POST'])
 def events_post():
-    eventtitle = request.form.get('eventtitle')
+    try:
+        eventtitle = request.form.get('eventtitle')
+    except:
+        print("An exception occured")
     print eventtitle
     eventdesc = request.form.get('eventdesc')
     print eventdesc
