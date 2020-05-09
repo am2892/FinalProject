@@ -1,9 +1,9 @@
 from flask import render_template, Blueprint, redirect, url_for, request, flash
 from flask_login import login_required, current_user
 import datetime
-from ..cal.cal import random_cal
-from ..models import Event
-from ..app import db
+from cal.cal import random_cal
+from models import Event
+from app import db
 
 main_bp = Blueprint('main', __name__)
 
@@ -29,20 +29,26 @@ def calendar():
 
 @main_bp.route("/calendar", methods=['POST'])
 def events_post():
+    print(request.form)
     eventtitle = request.form.get('eventtitle')
-    print eventtitle
+    print (eventtitle)
     eventdesc = request.form.get('eventdesc')
-    print eventdesc
+    print (eventdesc)
     starttime = request.form.get('starttime')
-    print starttime
+    print (starttime)
     endtime = request.form.get('endtime')
-    print endtime
+    print (endtime)
 
     if endtime < starttime:
         flash('End date and time cannot occur before start date and time. Try again.')
         return redirect(url_for('main.calendar'))
 
     else:
+        # TODO sqlalchemy.exc.StatementError: (builtins.TypeError) SQLite DateTime type only accepts Python datetime and date objects as input.
+        # received format ValueError: time data '2020-05-08T00:00'
+        # TODO check if correct format string: https://www.journaldev.com/23365/python-string-to-datetime-strptime
+        starttime = datetime.datetime.strptime(starttime, '%Y-%m-%dT%H:%M')
+        endtime = datetime.datetime.strptime(endtime, '%Y-%m-%dT%H:%M')
         new_event = Event(eventtitle=eventtitle, eventdesc=eventdesc, starttime=starttime, endtime=endtime)
 
         db.session.add(new_event)
