@@ -16,6 +16,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required
 from ..models import User
 from ..app import db
+from ..cal.cal import random_cal
+import datetime
 
 auth_bp = flask.Blueprint('auth', __name__, template_folder='templates')
 
@@ -52,7 +54,9 @@ def login_post():
         return redirect(url_for('auth.login'))
 
     login_user(user, remember=remember)
-    return redirect(url_for('main.calendar'))
+    now = datetime.datetime.now()
+#    return redirect(url_for('main.calendar'))
+    return redirect(url_for('cal.random_cal', year=now.year, month=now.month))
 
 # @auth.route('/login', methods=['POST'])
 @auth_bp.route('/login')
