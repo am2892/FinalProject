@@ -16,7 +16,6 @@
 - User can see monthly calendar view with events scheduled
 - User can press on event to see more information about that event
 - User can see event description, date, time, guests, location, URL, etc
-- User can load birthdays of friends/family/etc to automatically populate their calendar
 - Use an API to automatically populate all US-centric holidays or holidays of choice
 
 

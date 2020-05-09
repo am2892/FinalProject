@@ -14,40 +14,44 @@ def create_app():
 
 
 
-
     app.config['SECRET_KEY'] = '9OLWxND4o83j4K4iuopO'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
     register_extensions(app)
     register_blueprints(app)
-
+    setup_database(app)
 
     return app
-
 
 def register_extensions(app):
     print("registering extensions")
     db.init_app(app)
     login_manager.init_app(app)
 
-
 def register_blueprints(app):
-    from models import User
+    from .models import User
+    from .models import Event
     print("test")
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
     # blueprint for auth routes in our app
-    from auth.auth import auth_bp
+    from .auth.auth import auth_bp
     app.register_blueprint(auth_bp)
-    from main.main import main_bp
+    from .main.main import main_bp
     app.register_blueprint(main_bp)
     # blueprint for non-auth parts of app
     # from .main import main as main_blueprint
     # app.register_blueprint(main_blueprint)
-    from cal.cal import calendar_bp
+    from .cal.cal import calendar_bp
     app.register_blueprint(calendar_bp, url_prefix='/calendar')
     print("test this")
+
+def setup_database(app):
+    with app.app_context():
+        from .models import Event
+
+        db.create_all()
 
 if __name__ == '__main__':
     app = create_app()

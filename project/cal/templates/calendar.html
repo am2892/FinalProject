@@ -7,7 +7,67 @@
 <h2 class="subtitle">
   Monthly Calendar and Planner
 </h2>
+
+<div class="clearfix">
+	<a class="btn btn-info left""> Previous Month </a>
+	<a class="btn btn-info right"> Next Month </a>
+</div>
+
     <div class="table-responsive">
     {{ calendar|safe }}
     </div>
+
+<div class="box">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="notification is-danger">
+            {{ messages[0] }}.
+        </div>
+        {% endif %}
+        {% endwith %}
+
+Add event to your calendar
+
+<!-- <form>
+<label for="eventtitle">Event title:</label>
+<input type="text" id="eventtitle" name="eventtitle"><br>
+<label for="eventdesc">Event description:</label>
+<input type="text" id="eventdesc" name="eventdesc"><br>
+<label for="starttime">Start day/time:</label>
+<input type="datetime-local" id="starttime" name="starttime"><br>
+<label for="endtime">End day/time:</label>
+<input type="datetime-local" id="endtime" name="endtime"><br>
+<input type="submit" value="Add to calendar">
+</form> -->
+
+<form method="POST" action="/calendar" class="event-form">
+    <div class="field">
+        <div class="control">
+            <input class="event-input" type="text" id="eventtitle" placeholder="Event Title" autofocus="">
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="control">
+            <input class="event-input" type="text" id="eventdesc" placeholder="Event Description" autofocus="">
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="control">
+            <label for="starttime">Start day/time:</label>
+            <input class="event-input" type="datetime-local" id="starttime" placeholder="Start Date/Time" autofocus="">
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="control">
+            <label for="endtime">End day/time:</label>
+            <input class="event-input" type="datetime-local" id="endtime" placeholder="End Date/Time" autofocus="">
+        </div>
+    </div>
+
+    <button class="event-button">Add event</button>
+</form>
+    
 {% endblock %}
