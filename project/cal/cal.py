@@ -5,13 +5,6 @@ from flask import render_template, url_for
 from flask import render_template, Blueprint
 from flask_login import login_required, current_user
 import datetime
-import holidays
-
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
-from django.views import generic
-from django.urls import reverse
-from django.utils.safestring import mark_safe
 
 calendar_bp = flask.Blueprint('cal', __name__, template_folder='templates')
 
