@@ -16,17 +16,49 @@ def random_cal(year, month, ev = {}):
     tc = calendar.HTMLCalendar(firstweekday=0)
     tc.cssclasses = ["mon bg-primary", "tue bg-light", "wed bg-primary", "thu bg-light", "fri bg-primary", "sat bg-light", "sun bg-primary"]
     tc.cssclass_month = "table"
+    ### inserts holidays over entire calendar
     ev.clear()
     for date, name in holidays.US(years=year).items():
         if month == date.month:
             ev[date.day] = name
-    # print(tc.formatmonth(year, month))
+    indexTest(year, month)
     return render_template("calendar.html", calendar=custformat(tc, year, month, ev))
 
+index = {}
+def indexTest(yearInput, monthInput):
+    print "index before change"
+    print (index)
+    index["month"] = monthInput
+    index["year"] = yearInput
+    print (index)
+    return index
+
+@calendar_bp.route('/monthUP', methods=["GET", "POST"])
+@login_required
 def monthUP():
-    thismonth = random_cal.month
-    print(thismonth)
-    return(thismonth)
+    year = index["year"]
+    month = index["month"]
+    month += 1
+    if month > 12:
+        month = 1
+        year += 1
+    return redirect(url_for('cal.random_cal', year=year, month=month))
+
+@calendar_bp.route('/monthDOWN', methods=["GET", "POST"])
+@login_required
+def monthDOWN():
+    year = index["year"]
+    month = index["month"]
+    month -= 1
+    if month < 1:
+        month = 12
+        year -= 1
+    return redirect(url_for('cal.random_cal', year=year, month=month))
+
+#def monthUP():
+#    thismonth = random_cal.month
+#    print(thismonth)
+#    return(thismonth)
 
 #def cal_with_events():
 #    tc = calendar.HTMLCalendar(firstweekday=0)

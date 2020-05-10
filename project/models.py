@@ -15,7 +15,7 @@ class Event(db.Model):
     eventdesc = db.Column(db.String(500))
     starttime = db.Column(db.DateTime)
     endtime = db.Column(db.DateTime)
-#    user = db.Relationship('User')
+#    user = db.relationship('User')
 
 #class functions(db.Model):
 #    id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy

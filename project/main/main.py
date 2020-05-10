@@ -59,10 +59,24 @@ def events_post():
         # TODO check if correct format string: https://www.journaldev.com/23365/python-string-to-datetime-strptime
         starttime = datetime.datetime.strptime(starttime, '%Y-%m-%dT%H:%M')
         endtime = datetime.datetime.strptime(endtime, '%Y-%m-%dT%H:%M')
+        #new_event = Event(userName=current_user.name, eventtitle=eventtitle, eventdesc=eventdesc, starttime=starttime, endtime=endtime)
         new_event = Event(eventtitle=eventtitle, eventdesc=eventdesc, starttime=starttime, endtime=endtime)
-
         db.session.add(new_event)
         db.session.commit()
 
         flash('Event successfully added!')
         return redirect(url_for('main.calendar'))
+
+### set up code to queue events for displaying and deleting ###
+#def returnEvents(eventsHistory, itemsToReturn):
+#    for item in eventsHistory:
+#        if item.userName == current_user.name:
+#            itemsToReturn.append(item)
+
+#def deleteEvents(eventsHistory, itemsToReturn):
+#    for item in eventshistory:
+#        if item.userName == current_user.name:
+#            db.session.delete(item)
+#            db.session.commit()
+#    itemsToReturn = eventsHistory
+### set up code to queue events for displaying and deleting ###
