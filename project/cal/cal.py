@@ -7,24 +7,31 @@ from flask_login import login_required, current_user
 import datetime
 from datetime import date
 import holidays
+from ..models import User
+from ..models import Event
 
 calendar_bp = flask.Blueprint('cal', __name__, template_folder='templates')
 
 @calendar_bp.route('/<int:year>/<int:month>')
 @login_required
 def random_cal(year, month, ev = {}):
-    tc = calendar.HTMLCalendar(firstweekday=0)
-    tc.cssclasses = ["mon bg-primary", "tue bg-light", "wed bg-primary", "thu bg-light", "fri bg-primary", "sat bg-light", "sun bg-primary"]
+    tc = calendar.HTMLCalendar(firstweekday=6)
+    tc.cssclasses = ["mon", "tue", "wed", "thu", "fri", "sat", "sun bg-primary"]
     tc.cssclass_month = "table"
     ### inserts holidays over entire calendar
     ev.clear()
     for date, name in holidays.US(years=year).items():
         if month == date.month:
             ev[date.day] = name
+    userEvents = Event.query.all()
+    print
+    for item in userEvents:
+        if item.userName == current_user.name and year == item.starttime.year and month == item.starttime.month:
+            ev[item.starttime.day] = item.eventtitle
     indexTest(year, month)
     return render_template("calendar.html", calendar=custformat(tc, year, month, ev), name=current_user.name)
 
-index = {}
+index = {} ##this is used for properly indexing year and month buttons
 def indexTest(yearInput, monthInput):
     print "index before change"
     print (index)
