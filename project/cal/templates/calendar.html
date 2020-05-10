@@ -9,8 +9,8 @@
 </h2>
 
 <div class="clearfix">
-	<a class="btn btn-info left" href="{{ url_for('cal.monthDOWN') }}"> Previous Month </a>
-	<a class="btn btn-info right" href="{{ url_for('cal.monthUP') }}"> Next Month </a>
+	<a class="btn btn-info float-right" href="{{ url_for('cal.monthUP') }}"> Next Month </a>
+	<a class="btn btn-info float-right" href="{{ url_for('cal.monthDOWN') }}"> Previous Month </a>
 </div>
 
 <div class="year buttons">
@@ -79,7 +79,6 @@ Add event to your calendar
         <div>
           <div>
             <h1>{{ name }}'s Events</h1>
-            <input type="submit" class="button deleteAll" name="event" value="Delete All My Events"></input>
           </div>
         <table>
         {% if logCount %}
@@ -90,7 +89,7 @@ Add event to your calendar
               <td class='log'>{{log.starttime}}:</td>
               <td class='log'>{{log.endtime}}</td>
               <td>
-                  <a class="button delete">Delete this event</a>
+                  <a class="button delete" href="{{ url_for('cal.deleteEvents', eventHistory_id=log.id) }}">Delete this event</a>
               </td>
               </td> 
             </tr>

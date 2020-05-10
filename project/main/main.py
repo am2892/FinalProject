@@ -80,32 +80,9 @@ def events_post():
 
 ### return the list of events for the logged-in user:
 def returnEvents():
-#    mycursor = Event.cursor()
-#    sql = "SELECT * FROM event ORDER BY starttime"
-#    Event.execute(sql)
-    eventHistory = Event.query.all()
-#    print(eventHistory.Event)
-#    print(eventHistory.starttime)
+    eventHistory = Event.query.order_by(Event.starttime).all()
     itemsToReturn = []
     for item in eventHistory:
         if item.userName == current_user.name:
             itemsToReturn.append(item)
-    print(dir(itemsToReturn))
     return itemsToReturn
-
-### delete specific events upon user clicking 'delete':
-#def deleveEvents():
-
-
-#def deleteEvents(eventsHistory, itemsToReturn):
-#    for item in eventshistory:
-#        if item.userName == current_user.name:
-#            db.session.delete(item)
-#            db.session.commit()
-#    itemsToReturn = eventsHistory
-
-#@main_bp.route('/delete_event/<event_id>')
-#@login_required
-#def delete_event(event_id):
-#    event = Event.query
-### set up code to queue events for displaying and deleting ###

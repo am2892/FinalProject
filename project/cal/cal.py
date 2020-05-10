@@ -10,6 +10,7 @@ import holidays
 from ..models import User
 from ..models import Event
 from ..main.main import returnEvents
+from ..app import db
 
 calendar_bp = flask.Blueprint('cal', __name__, template_folder='templates')
 
@@ -32,14 +33,14 @@ def random_cal(year, month, ev = {}):
             else:
                 ev[item.starttime.day] = [item.eventtitle +"-" + str(item.starttime.time()) + "</br>"]
     print(ev)
-    indexTest(year, month)
+    indexCal(year, month)
     itemsToReturn = returnEvents()
     print("items to return")
     print(itemsToReturn)
     return render_template("calendar.html", calendar=custformat(tc, year, month, ev), name=current_user.name, logCount=itemsToReturn)
 
 index = {} ##this is used for properly indexing year and month buttons
-def indexTest(yearInput, monthInput):
+def indexCal(yearInput, monthInput):
     print "index before change"
     print (index)
     index["month"] = monthInput
@@ -84,6 +85,14 @@ def yearDOWN():
     month = index["month"]
     year -= 1
     return redirect(url_for('cal.random_cal', year=year, month=month))
+
+@calendar_bp.route('/delete_component/<eventHistory_id>')
+@login_required
+def deleteEvents(eventHistory_id):
+    eventHistory = Event.query.filter_by(id=eventHistory_id).first_or_404()
+    db.session.delete(eventHistory)
+    db.session.commit()
+    return redirect(url_for('cal.random_cal', year=index["year"], month=index["month"]))
 
 #def monthUP():
 #    thismonth = random_cal.month
