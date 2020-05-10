@@ -22,7 +22,7 @@ def random_cal(year, month, ev = {}):
         if month == date.month:
             ev[date.day] = name
     indexTest(year, month)
-    return render_template("calendar.html", calendar=custformat(tc, year, month, ev))
+    return render_template("calendar.html", calendar=custformat(tc, year, month, ev), name=current_user.name)
 
 index = {}
 def indexTest(yearInput, monthInput):
