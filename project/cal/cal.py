@@ -22,12 +22,15 @@ def random_cal(year, month, ev = {}):
     ev.clear()
     for date, name in holidays.US(years=year).items():
         if month == date.month:
-            ev[date.day] = name
+            ev[date.day] = [name +"</br>"]
     userEvents = Event.query.all()
-    print
     for item in userEvents:
         if item.userName == current_user.name and year == item.starttime.year and month == item.starttime.month:
-            ev[item.starttime.day] = item.eventtitle
+            if item.starttime.day in ev:
+                ev[item.starttime.day].append(item.eventtitle +"-" + str(item.starttime.time())+ "</br>")
+            else:
+                ev[item.starttime.day] = [item.eventtitle +"-" + str(item.starttime.time()) + "</br>"]
+    print(ev)
     indexTest(year, month)
     return render_template("calendar.html", calendar=custformat(tc, year, month, ev), name=current_user.name)
 

@@ -2,6 +2,7 @@ from flask import render_template, Blueprint, redirect, url_for, request, flash,
 from flask_login import login_required, current_user
 import datetime
 from ..cal.cal import random_cal
+from ..models import User
 from ..models import Event
 from ..app import db
 import holidays
@@ -54,6 +55,14 @@ def events_post():
         flash('End date and time cannot occur before start date and time. Try again.')
         return redirect(url_for('main.calendar'))
 
+    if eventtitle is None:
+        flash('Event title required. Try again.')
+        return redirect(url_for('main.calendar'))
+
+    if starttime == '' and endtime == '':
+        flash('Dates and times required. Try again.')
+        return redirect(url_for('main.calendar'))
+
     else:
         # TODO sqlalchemy.exc.StatementError: (builtins.TypeError) SQLite DateTime type only accepts Python datetime and date objects as input.
         # received format ValueError: time data '2020-05-08T00:00'
@@ -69,10 +78,20 @@ def events_post():
         return redirect(url_for('main.calendar'))
 
 ### set up code to queue events for displaying and deleting ###
-#def returnEvents(eventsHistory, itemsToReturn):
-#    for item in eventsHistory:
-#        if item.userName == current_user.name:
-#            itemsToReturn.append(item)
+@main_bp.route('/return_event/<component_id>')
+@login_required
+def returnEvents(component_id):
+    component = Event.query.filter_by(id=component_id).first_or_404()
+    eventtitle = component.eventtitle
+    eventdesc = component.eventdesc
+    starttime = component.starttime
+    endtime = component.endtime
+    eventHistory = Event.query.all
+    itemsToReturn = []
+    for item in eventHistory:
+        if item.userName == current_user.name:
+            itemsToReturn.append(item)
+    return render_template('calendar.html', logCount=itemsToReturn, name=current.user_name, eventtitle=eventtitle, eventdesc=eventdesc, starttime=starttime, endtime=endtime)
 
 #def deleteEvents(eventsHistory, itemsToReturn):
 #    for item in eventshistory:
