@@ -14,8 +14,8 @@
 </div>
 
 <div class="year buttons">
-        <a class="btn btn-success" href="{{ url_for('cal.yearDOWN') }}"> Previous Year </a>
-        <a class="btn btn-success" href="{{ url_for('cal.yearUP') }}"> Next Year </a>
+        <a class="btn btn-success float-right" href="{{ url_for('cal.yearUP') }}"> Next Year </a>
+        <a class="btn btn-success float-right" href="{{ url_for('cal.yearDOWN') }}"> Previous Year </a>
 </div>
 
     <div class="table-responsive">
@@ -85,8 +85,8 @@ Add event to your calendar
         {% if logCount %}
             {% for log in logCount %}
             <tr>
-              <td class='log'>{{log.eventtitle}}:</td>
-              <td class='log'>{{log.eventdesc}}</td>
+              <td class='log'><b>{{log.eventtitle}}</b></td>
+              <td class='log'><i>{{log.eventdesc}}</i></td>
               <td class='log'>{{log.starttime}}:</td>
               <td class='log'>{{log.endtime}}</td>
               <td>

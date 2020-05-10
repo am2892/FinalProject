@@ -8,6 +8,7 @@ from ..app import db
 import holidays
 from datetime import date
 import calendar
+from flask_sqlalchemy import SQLAlchemy
 
 main_bp = Blueprint('main', __name__, template_folder='templates')
 
@@ -77,24 +78,24 @@ def events_post():
         flash('Event successfully added!')
         return redirect(url_for('main.calendar'))
 
-### set up code to queue events for displaying and deleting ###
-#@main_bp.route('/return_event/<component_id>')
-#@login_required
+### return the list of events for the logged-in user:
 def returnEvents():
-#    component = Event.query.filter_by(id=component_id).first_or_404()
-#    print("this is component")
-#    print(component)
-#    eventtitle = component.eventtitle
-#    eventdesc = component.eventdesc
-#    starttime = component.starttime
-#    endtime = component.endtime
+#    mycursor = Event.cursor()
+#    sql = "SELECT * FROM event ORDER BY starttime"
+#    Event.execute(sql)
     eventHistory = Event.query.all()
+#    print(eventHistory.Event)
+#    print(eventHistory.starttime)
     itemsToReturn = []
     for item in eventHistory:
         if item.userName == current_user.name:
             itemsToReturn.append(item)
+    print(dir(itemsToReturn))
     return itemsToReturn
-#    return redirect(url_for('cal.random_cal', logCount=itemsToReturn, name=current.user_name, eventtitle=eventtitle, eventdesc=eventdesc, starttime=starttime, endtime=endtime))
+
+### delete specific events upon user clicking 'delete':
+#def deleveEvents():
+
 
 #def deleteEvents(eventsHistory, itemsToReturn):
 #    for item in eventshistory:
