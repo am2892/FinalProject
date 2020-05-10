@@ -9,6 +9,7 @@ from datetime import date
 import holidays
 from ..models import User
 from ..models import Event
+from ..main.main import returnEvents
 
 calendar_bp = flask.Blueprint('cal', __name__, template_folder='templates')
 
@@ -22,7 +23,7 @@ def random_cal(year, month, ev = {}):
     ev.clear()
     for date, name in holidays.US(years=year).items():
         if month == date.month:
-            ev[date.day] = [name +"</br>"]
+            ev[date.day] = [name.upper() +"</br>"]
     userEvents = Event.query.all()
     for item in userEvents:
         if item.userName == current_user.name and year == item.starttime.year and month == item.starttime.month:
@@ -32,7 +33,10 @@ def random_cal(year, month, ev = {}):
                 ev[item.starttime.day] = [item.eventtitle +"-" + str(item.starttime.time()) + "</br>"]
     print(ev)
     indexTest(year, month)
-    return render_template("calendar.html", calendar=custformat(tc, year, month, ev), name=current_user.name)
+    itemsToReturn = returnEvents()
+    print("items to return")
+    print(itemsToReturn)
+    return render_template("calendar.html", calendar=custformat(tc, year, month, ev), name=current_user.name, logCount=itemsToReturn)
 
 index = {} ##this is used for properly indexing year and month buttons
 def indexTest(yearInput, monthInput):

@@ -1,7 +1,7 @@
 from flask import render_template, Blueprint, redirect, url_for, request, flash, session
 from flask_login import login_required, current_user
 import datetime
-from ..cal.cal import random_cal
+from ..cal.cal import *
 from ..models import User
 from ..models import Event
 from ..app import db
@@ -78,20 +78,23 @@ def events_post():
         return redirect(url_for('main.calendar'))
 
 ### set up code to queue events for displaying and deleting ###
-@main_bp.route('/return_event/<component_id>')
-@login_required
-def returnEvents(component_id):
-    component = Event.query.filter_by(id=component_id).first_or_404()
-    eventtitle = component.eventtitle
-    eventdesc = component.eventdesc
-    starttime = component.starttime
-    endtime = component.endtime
-    eventHistory = Event.query.all
+#@main_bp.route('/return_event/<component_id>')
+#@login_required
+def returnEvents():
+#    component = Event.query.filter_by(id=component_id).first_or_404()
+#    print("this is component")
+#    print(component)
+#    eventtitle = component.eventtitle
+#    eventdesc = component.eventdesc
+#    starttime = component.starttime
+#    endtime = component.endtime
+    eventHistory = Event.query.all()
     itemsToReturn = []
     for item in eventHistory:
         if item.userName == current_user.name:
             itemsToReturn.append(item)
-    return render_template('calendar.html', logCount=itemsToReturn, name=current.user_name, eventtitle=eventtitle, eventdesc=eventdesc, starttime=starttime, endtime=endtime)
+    return itemsToReturn
+#    return redirect(url_for('cal.random_cal', logCount=itemsToReturn, name=current.user_name, eventtitle=eventtitle, eventdesc=eventdesc, starttime=starttime, endtime=endtime))
 
 #def deleteEvents(eventsHistory, itemsToReturn):
 #    for item in eventshistory:

@@ -75,16 +75,16 @@ Add event to your calendar
     <button class="event-button">Add event</button>
 </form>
 
-<div class="event-wrapper">
-        <div class="log-container">
-          <div class="title-container">
+<div>
+        <div>
+          <div>
             <h1>{{ name }}'s Events</h1>
-            <input type="submit" class="button deleteAll" name="function" value="Delete All My Events"></input>
+            <input type="submit" class="button deleteAll" name="event" value="Delete All My Events"></input>
           </div>
-        <table class="events-container">
+        <table>
         {% if logCount %}
             {% for log in logCount %}
-            <tr class="table-row">
+            <tr>
               <td class='log'>{{log.eventtitle}}:</td>
               <td class='log'>{{log.eventdesc}}</td>
               <td class='log'>{{log.starttime}}:</td>
@@ -93,7 +93,8 @@ Add event to your calendar
                   <a class="button delete">Delete this event</a>
               </td>
               <td>
-<!--                <a href="{{ url_for('main.return_numbers', component_id=log.id) }}" class="button bring-back">bring back</a> -->
+                  <a class="button delete">delete</a>
+              </td> 
               </td>
             </tr>
           {% endfor %}
