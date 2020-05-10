@@ -13,6 +13,11 @@
 	<a class="btn btn-info right" href="{{ url_for('cal.monthUP') }}"> Next Month </a>
 </div>
 
+<div class="year buttons">
+        <a class="btn btn-success" href="{{ url_for('cal.yearDOWN') }}"> Previous Year </a>
+        <a class="btn btn-success" href="{{ url_for('cal.yearUP') }}"> Next Year </a>
+</div>
+
     <div class="table-responsive">
     {{ calendar|safe }}
     </div>

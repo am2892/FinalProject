@@ -40,6 +40,7 @@ def calendar():
 @main_bp.route("/calendar", methods=['POST'])
 def events_post():
     print(request.form)
+    userName = current_user.name
     eventtitle = request.form.get('eventtitle')
     print (eventtitle)
     eventdesc = request.form.get('eventdesc')
@@ -60,7 +61,7 @@ def events_post():
         starttime = datetime.datetime.strptime(starttime, '%Y-%m-%dT%H:%M')
         endtime = datetime.datetime.strptime(endtime, '%Y-%m-%dT%H:%M')
         #new_event = Event(userName=current_user.name, eventtitle=eventtitle, eventdesc=eventdesc, starttime=starttime, endtime=endtime)
-        new_event = Event(eventtitle=eventtitle, eventdesc=eventdesc, starttime=starttime, endtime=endtime)
+        new_event = Event(userName=userName, eventtitle=eventtitle, eventdesc=eventdesc, starttime=starttime, endtime=endtime)
         db.session.add(new_event)
         db.session.commit()
 
@@ -79,4 +80,9 @@ def events_post():
 #            db.session.delete(item)
 #            db.session.commit()
 #    itemsToReturn = eventsHistory
+
+#@main_bp.route('/delete_event/<event_id>')
+#@login_required
+#def delete_event(event_id):
+#    event = Event.query
 ### set up code to queue events for displaying and deleting ###

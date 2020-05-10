@@ -11,6 +11,7 @@ class User(UserMixin, db.Model):
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    userName = db.Column(db.String(1000))
     eventtitle = db.Column(db.String(100))
     eventdesc = db.Column(db.String(500))
     starttime = db.Column(db.DateTime)

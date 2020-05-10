@@ -55,6 +55,22 @@ def monthDOWN():
         year -= 1
     return redirect(url_for('cal.random_cal', year=year, month=month))
 
+@calendar_bp.route('/yearUP', methods=["GET", "POST"])
+@login_required
+def yearUP():
+    year = index["year"]
+    month = index["month"]
+    year += 1
+    return redirect(url_for('cal.random_cal', year=year, month=month))
+
+@calendar_bp.route('/yearDOWN', methods=["GET", "POST"])
+@login_required
+def yearDOWN():
+    year = index["year"]
+    month = index["month"]
+    year -= 1
+    return redirect(url_for('cal.random_cal', year=year, month=month))
+
 #def monthUP():
 #    thismonth = random_cal.month
 #    print(thismonth)
