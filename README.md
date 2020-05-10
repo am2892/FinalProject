@@ -1,4 +1,4 @@
-# Final Project
+# Monthly Calendar and Planner
 
 #### Team Members
 - Aaron Miller
@@ -14,9 +14,7 @@
 - User can add event description, date, time, guests, location, URL, etc.
 - User can delete event(s) in calendar
 - User can see monthly calendar view with events scheduled
-- User can press on event to see more information about that event
-- User can see event description, date, time, guests, location, URL, etc
-- Use an API to automatically populate all US-centric holidays or holidays of choice
+- Uses a python module to automatically populate all US-centric holidays or holidays of choice
 
 
 #### Tools Used 
@@ -24,6 +22,6 @@
 * SQLAlchemy
 * Sqlite
 * Jinja
-* Scipy
+
 
 #### Screenshots
