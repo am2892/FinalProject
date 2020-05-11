@@ -84,10 +84,10 @@ Add event to your calendar
         {% if logCount %}
             {% for log in logCount %}
             <tr>
-              <td class='log'><b>{{log.eventtitle}}</b></td>
-              <td class='log'><i>{{log.eventdesc}}</i></td>
-              <td class='log'>{{log.starttime}}:</td>
-              <td class='log'>{{log.endtime}}</td>
+              <td class='log'><b>{{log.eventtitle}}</b>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              <td class='log'>{{log.eventdesc}}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              <td class='log'>{{log.starttime.strftime( "%x %I:%M %p" )}}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              <td class='log'>{{log.endtime.strftime( "%x %I:%M %p" )}}&nbsp;&nbsp;&nbsp;&nbsp;</td>
               <td>
                   <a class="button delete" href="{{ url_for('cal.deleteEvents', eventHistory_id=log.id) }}">Delete this event</a>
               </td>

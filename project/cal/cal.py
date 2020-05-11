@@ -24,14 +24,14 @@ def random_cal(year, month, ev = {}):
     ev.clear()
     for date, name in holidays.US(years=year).items():
         if month == date.month:
-            ev[date.day] = [name.upper() +"</br>"]
+            ev[date.day] = [name.upper() +"&nbsp;&nbsp;&nbsp;&nbsp; </br>"]
     userEvents = Event.query.all()
     for item in userEvents:
         if item.userName == current_user.name and year == item.starttime.year and month == item.starttime.month:
             if item.starttime.day in ev:
-                ev[item.starttime.day].append(item.eventtitle +"-" + str(item.starttime.time())+ "</br>")
+                ev[item.starttime.day].append(item.eventtitle +"-" + str(item.starttime.strftime( "%I:%M %p" ))+ "&nbsp;&nbsp;&nbsp;&nbsp; </br>")
             else:
-                ev[item.starttime.day] = [item.eventtitle +"-" + str(item.starttime.time()) + "</br>"]
+                ev[item.starttime.day] = [item.eventtitle +"-" + str(item.starttime.strftime( "%I:%M %p" )) + "&nbsp;&nbsp;&nbsp;&nbsp; </br>"]
     print(ev)
     indexCal(year, month)
     itemsToReturn = returnEvents()
@@ -41,7 +41,7 @@ def random_cal(year, month, ev = {}):
 
 index = {} ##this is used for properly indexing year and month buttons
 def indexCal(yearInput, monthInput):
-    print "index before change"
+    print ("index before change")
     print (index)
     index["month"] = monthInput
     index["year"] = yearInput
