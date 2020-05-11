@@ -5,7 +5,6 @@ from ..cal.cal import *
 from ..models import User
 from ..models import Event
 from ..app import db
-import holidays
 from datetime import date
 import calendar
 from flask_sqlalchemy import SQLAlchemy

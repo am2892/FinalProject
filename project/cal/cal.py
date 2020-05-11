@@ -6,10 +6,9 @@ from flask import render_template, Blueprint
 from flask_login import login_required, current_user
 import datetime
 from datetime import date
-import holidays
 from ..models import User
 from ..models import Event
-from ..main.main import returnEvents
+#from ..main.main import returnEvents
 from ..app import db
 
 calendar_bp = flask.Blueprint('cal', __name__, template_folder='templates')
@@ -17,6 +16,8 @@ calendar_bp = flask.Blueprint('cal', __name__, template_folder='templates')
 @calendar_bp.route('/<int:year>/<int:month>')
 @login_required
 def random_cal(year, month, ev = {}):
+    import holidays
+    from ..main.main import returnEvents
     tc = calendar.HTMLCalendar(firstweekday=6)
     tc.cssclasses = ["mon", "tue", "wed", "thu", "fri", "sat", "sun bg-primary"]
     tc.cssclass_month = "table"
@@ -24,7 +25,7 @@ def random_cal(year, month, ev = {}):
     ev.clear()
     for date, name in holidays.US(years=year).items():
         if month == date.month:
-            ev[date.day] = [name.upper() +"&nbsp;&nbsp;&nbsp;&nbsp; </br>"]
+            ev[date.day] = [name.upper() + "</br>"]
     userEvents = Event.query.all()
     for item in userEvents:
         if item.userName == current_user.name and year == item.starttime.year and month == item.starttime.month:
