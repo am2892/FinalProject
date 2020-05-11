@@ -81,10 +81,14 @@ Add event to your calendar
             <h1>{{ name }}'s Events</h1>
           </div>
         <table>
+            <td class='header'><b>Title</b>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td class='header'><b>Notes</b>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td class='header'><b>Start date/time</b>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td class='header'><b>End date/time</b>&nbsp;&nbsp;&nbsp;&nbsp;</td>
         {% if logCount %}
             {% for log in logCount %}
             <tr>
-              <td class='log'><b>{{log.eventtitle}}</b>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              <td class='log'>{{log.eventtitle}}&nbsp;&nbsp;&nbsp;&nbsp;</td>
               <td class='log'>{{log.eventdesc}}&nbsp;&nbsp;&nbsp;&nbsp;</td>
               <td class='log'>{{log.starttime.strftime( "%x %I:%M %p" )}}&nbsp;&nbsp;&nbsp;&nbsp;</td>
               <td class='log'>{{log.endtime.strftime( "%x %I:%M %p" )}}&nbsp;&nbsp;&nbsp;&nbsp;</td>

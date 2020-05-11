@@ -26,7 +26,7 @@ def random_cal(year, month, ev = {}):
     for date, name in holidays.US(years=year).items():
         if month == date.month:
             ev[date.day] = [name.upper() + "</br>"]
-    userEvents = Event.query.all()
+    userEvents = Event.query.order_by(Event.starttime).all()
     for item in userEvents:
         if item.userName == current_user.name and year == item.starttime.year and month == item.starttime.month:
             if item.starttime.day in ev:

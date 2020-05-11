@@ -55,6 +55,9 @@ def events_post():
         flash('End date and time cannot occur before start date and time. Try again.')
         return redirect(url_for('main.calendar'))
 
+    if endtime == starttime:
+        flash('Start/end dates and times must be greater than one minute. Try again.')
+
     if eventtitle is None:
         flash('Event title required. Try again.')
         return redirect(url_for('main.calendar'))
@@ -73,6 +76,11 @@ def events_post():
         new_event = Event(userName=userName, eventtitle=eventtitle, eventdesc=eventdesc, starttime=starttime, endtime=endtime)
         db.session.add(new_event)
         db.session.commit()
+
+        ### check for schedule conflict ###
+#        conflict_check = Event.query.all()
+#        for item in conflict_check:
+#            if userName == item.userName and
 
         flash('Event successfully added!')
         return redirect(url_for('main.calendar'))
