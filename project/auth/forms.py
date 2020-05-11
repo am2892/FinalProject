@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 
-
+ 
 class RegisterForm(FlaskForm):
     email = StringField('Email', render_kw={'class': 'form-control'})
     username = StringField('Username', render_kw={'class': 'form-control'})

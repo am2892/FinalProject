@@ -8,3 +8,4 @@ setup(name='MyPythonProject',
       url='',
       packages=find_packages(),
      )
+ 

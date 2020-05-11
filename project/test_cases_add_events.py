@@ -13,3 +13,4 @@ endtime = '2020-05-01 09:30:00'
 def test_add_event():
     from .main.main import events_post
     assert events_post == redirect(url_for('main.calendar'))
+ 
