@@ -18,5 +18,4 @@ install:
   - pip install holidays
 # command to run tests
 script:
-  - pytest
- 
+  - pytest 
